@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h2 class="text-center mb-4">Admin Dashboard</h2>
+
+        <!-- Form to Add a New Category -->
+        <div class="card mb-3">
+            <div class="card-header">Add New Category</div>
+            <div class="card-body">
+                <form action="/admin/category/add" method="post">
+                    <div class="mb-3">
+                        <label for="categoryName" class="form-label">Category Name</label>
+                        <input type="text" class="form-control" id="categoryName" name="name" placeholder="Enter Category Name" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Add Category</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Form to Add a New Quiz -->
+        <div class="card mb-3">
+            <div class="card-header">Add New Quiz</div>
+            <div class="card-body">
+                <form action="/admin/quiz/add" method="post">
+                    <div class="mb-3">
+                        <label for="quizTitle" class="form-label">Quiz Title</label>
+                        <input type="text" class="form-control" id="quizTitle" name="title" placeholder="Enter Quiz Title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="categoryId" class="form-label">Select Category</label>
+                        <select id="categoryId" name="categoryId" class="form-select" required>
+                            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success">Add Quiz</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Form to Add a New Question -->
+        <div class="card mb-3">
+            <div class="card-header">Add New Question</div>
+            <div class="card-body">
+                <form action="/admin/question/add" method="post">
+                    <div class="mb-3">
+                        <label for="questionTitle" class="form-label">Question Title</label>
+                        <input type="text" class="form-control" id="questionTitle" name="title" placeholder="Enter Question" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="optionA" class="form-label">Option A</label>
+                        <input type="text" class="form-control" id="optionA" name="optionA" placeholder="Option A" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="optionB" class="form-label">Option B</label>
+                        <input type="text" class="form-control" id="optionB" name="optionB" placeholder="Option B" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="optionC" class="form-label">Option C</label>
+                        <input type="text" class="form-control" id="optionC" name="optionC" placeholder="Option C" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="correctAnswer" class="form-label">Correct Option</label>
+                        <select id="correctAnswer" name="correctAnswer" class="form-select" required>
+                            <option value="1">Option A</option>
+                            <option value="2">Option B</option>
+                            <option value="3">Option C</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="quizId" class="form-label">Select Quiz</label>
+                        <select id="quizId" name="quizId" class="form-select" required>
+                            <option th:each="quiz : ${quizzes}" th:value="${quiz.id}" th:text="${quiz.title}"></option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success">Add Question</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
